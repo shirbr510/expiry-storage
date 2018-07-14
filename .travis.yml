@@ -8,6 +8,9 @@ node_js:
 - '10'
 - '9'
 - '8'
+before_deploy:
+- npm install -g rollup
+- npm install --only=dev
 deploy:
   provider: npm
   email: shirbr510@gmail.com

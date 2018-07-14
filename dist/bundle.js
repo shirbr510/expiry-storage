@@ -2,6 +2,32 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var isStorageLike = function isStorageLike(storage) {
+    return !!storage && storage !== null && typeof storage.getItem === "function" && typeof storage.setItem === "function" && typeof storage.removeItem === "function" && typeof storage.clear === "function";
+};
+
+var getDefaultStorage = function getDefaultStorage() {
+    if (!!window) {
+        var _window = window,
+            localStorage = _window.localStorage;
+
+        if (localStorage) {
+            return localStorage;
+        }
+    }
+    throw "no supported storage found";
+};
+
+var getAdapterByStorage = function getAdapterByStorage(storage) {
+    if (!storage) {
+        return getDefaultStorage();
+    }
+    if (isStorageLike(storage)) {
+        return storage;
+    }
+    return null;
+};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -73,7 +99,8 @@ var ExpirableStorage = function () {
 }();
 
 var createExpirableStorage = function createExpirableStorage(storage) {
-    return new ExpirableStorage(storage);
+    var storageAdapter = getAdapterByStorage(storage);
+    return new ExpirableStorage(storageAdapter);
 };
 
 exports.createExpirableStorage = createExpirableStorage;
