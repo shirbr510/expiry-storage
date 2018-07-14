@@ -1,6 +1,7 @@
-describe('sanity test', () => {
+import { createExpirableStorage } from "../index"
 
-    it('should always pass', () => {
-      expect(null).toBeNull
-    });
+describe('export sanity test', () => {
+  it('should always return a function for createExpiredStorage', () => {
+    expect(createExpirableStorage).toBeInstanceOf(Function)
+  });
 })

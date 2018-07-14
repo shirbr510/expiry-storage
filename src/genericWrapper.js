@@ -1,3 +1,5 @@
+import getAdapterByStorage from "./adapters"
+
 class ExpirableStorage{
     constructor(storage){
         this.storage=storage;
@@ -30,7 +32,10 @@ class ExpirableStorage{
     }
 }
 
-const createExpirableStorage= storage => new ExpirableStorage(storage)
+const createExpirableStorage= storage => {
+    const storageAdapter = getAdapterByStorage(storage)
+    return new ExpirableStorage(storageAdapter)
+}
 
 export {
     createExpirableStorage
