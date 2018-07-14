@@ -1,6 +1,6 @@
 {
   "name": "expiry-storage",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "an expiration wrapper around storages with the syntax of localStorage",
   "main": "dist/index.js",
   "files": [
